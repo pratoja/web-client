@@ -1,34 +1,27 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colors } from '../theme/colors';
 import { Banner } from '../types/catalog';
 
-const AUTOPLAY_MS = 3500;
+const AUTOPLAY_MS = 4000;
 
 export function BannerCarousel({ banners }: { banners: Banner[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (banners.length <= 1) return;
     const interval = setInterval(() => {
-      setActiveIndex((current) => {
-        const next = (current + 1) % banners.length;
-        const el = scrollRef.current;
-        if (el) {
-          const child = el.children[next] as HTMLElement | undefined;
-          child?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-        }
-        return next;
-      });
+      setActiveIndex((current) => (current + 1) % banners.length);
     }, AUTOPLAY_MS);
     return () => clearInterval(interval);
   }, [banners.length]);
 
   if (banners.length === 0) return null;
 
-  function handlePress(banner: Banner) {
-    if (banner.linkUrl) {
-      window.open(banner.linkUrl, '_blank', 'noopener,noreferrer');
+  const activeBanner = banners[activeIndex];
+
+  function handlePress() {
+    if (activeBanner.linkUrl) {
+      window.open(activeBanner.linkUrl, '_blank', 'noopener,noreferrer');
     }
   }
 
@@ -52,101 +45,93 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
         </h2>
       </div>
 
-      <div
-        ref={scrollRef}
-        className="banner-scroll"
-        style={{
-          display: 'flex',
-          gap: 20,
-          overflowX: 'auto',
-          padding: '4px 20px 10px',
-          scrollSnapType: 'x mandatory',
-        }}
-      >
-        {banners.map((banner, index) => (
-          <div
-            key={banner.id}
-            onClick={() => handlePress(banner)}
-            style={{
-              position: 'relative',
-              width: 560,
-              height: 260,
-              borderRadius: 22,
-              overflow: 'hidden',
-              flexShrink: 0,
-              cursor: banner.linkUrl ? 'pointer' : 'default',
-              scrollSnapAlign: 'start',
-              boxShadow: '0 14px 32px rgba(0,0,0,0.22)',
-              background: `linear-gradient(135deg, ${colors.dark}, ${colors.darkSecondary})`,
-              border: '1px solid rgba(255,183,3,0.25)',
-              transition: 'transform 0.2s ease',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-4px)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-            }}
-          >
+      {/* Um banner inteiro por vez, trocando sozinho — sem cortar a imagem. */}
+      <div style={{ padding: '0 20px' }}>
+        <div
+          onClick={handlePress}
+          style={{
+            position: 'relative',
+            width: '100%',
+            aspectRatio: '2.4 / 1',
+            borderRadius: 22,
+            overflow: 'hidden',
+            cursor: activeBanner.linkUrl ? 'pointer' : 'default',
+            boxShadow: '0 14px 32px rgba(0,0,0,0.22)',
+            background: `linear-gradient(135deg, ${colors.dark}, ${colors.darkSecondary})`,
+            border: '1px solid rgba(255,183,3,0.25)',
+          }}
+        >
+          {banners.map((banner, index) => (
             <img
+              key={banner.id}
               src={banner.imageUrl}
               alt=""
               style={{
+                position: 'absolute',
+                inset: 0,
                 width: '100%',
                 height: '100%',
                 // "contain" garante que o banner inteiro apareça, sem cortar
                 // texto ou parte da imagem nas bordas.
                 objectFit: 'contain',
-                display: 'block',
-              }}
-            />
-
-            {/* Sombra gradiente embaixo, pra dar profundidade e destacar o número */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background: 'linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%)',
+                opacity: index === activeIndex ? 1 : 0,
+                transition: 'opacity 0.6s ease',
                 pointerEvents: 'none',
               }}
             />
+          ))}
 
-            {/* Selo numerado estilo "Top 10" */}
-            <div
-              className="brand"
-              style={{
-                position: 'absolute',
-                top: 16,
-                left: 16,
-                width: 54,
-                height: 54,
-                borderRadius: '50%',
-                background: colors.gradient,
-                color: '#1A1A1A',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontWeight: 800,
-                fontSize: 24,
-                boxShadow: '0 4px 10px rgba(0,0,0,0.35)',
-                border: '3px solid rgba(255,255,255,0.85)',
-              }}
-            >
-              {index + 1}
-            </div>
+          {/* Sombra gradiente embaixo, pra destacar o número mesmo em cima de fotos claras */}
+          <div
+            style={{
+              position: 'absolute',
+              inset: 0,
+              background: 'linear-gradient(180deg, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%)',
+              pointerEvents: 'none',
+            }}
+          />
+
+          {/* Selo numerado estilo "Top 10" */}
+          <div
+            className="brand"
+            style={{
+              position: 'absolute',
+              top: 16,
+              left: 16,
+              width: 54,
+              height: 54,
+              borderRadius: '50%',
+              background: colors.gradient,
+              color: '#1A1A1A',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 800,
+              fontSize: 24,
+              boxShadow: '0 4px 10px rgba(0,0,0,0.35)',
+              border: '3px solid rgba(255,255,255,0.85)',
+            }}
+          >
+            {activeIndex + 1}
           </div>
-        ))}
+        </div>
       </div>
 
       {banners.length > 1 ? (
         <div style={{ display: 'flex', justifyContent: 'center', gap: 6, marginTop: 10 }}>
           {banners.map((banner, index) => (
-            <div
+            <button
               key={banner.id}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              aria-label={`Ver banner ${index + 1}`}
               style={{
                 width: index === activeIndex ? 20 : 6,
                 height: 6,
                 borderRadius: 3,
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
                 background: index === activeIndex ? colors.gradient : colors.border,
                 transition: 'width 0.2s',
               }}
