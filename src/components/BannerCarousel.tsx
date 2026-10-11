@@ -75,8 +75,16 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
               flexShrink: 0,
               cursor: banner.linkUrl ? 'pointer' : 'default',
               scrollSnapAlign: 'start',
-              boxShadow: '0 10px 24px rgba(0,0,0,0.18)',
+              boxShadow: '0 14px 32px rgba(0,0,0,0.22)',
               backgroundColor: colors.border,
+              border: '1px solid rgba(255,183,3,0.25)',
+              transition: 'transform 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = 'translateY(-4px)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = 'translateY(0)';
             }}
           >
             <img
