@@ -28,6 +28,15 @@ img {
   max-width: 100%;
 }
 
+/* Carrossel de banners: rolagem automática, sem a barra de rolagem visível. */
+.banner-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Edge antigo */
+}
+.banner-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge novo */
+}
+
 @media (max-width: 640px) {
   header nav {
     gap: 10px !important;

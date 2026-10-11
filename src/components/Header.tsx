@@ -40,7 +40,7 @@ export function Header() {
       style={{
         background: `linear-gradient(180deg, ${colors.dark} 0%, ${colors.darkSecondary} 100%)`,
         color: colors.onDark,
-        padding: '12px 20px',
+        padding: '10px 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -64,12 +64,12 @@ export function Header() {
         <img
           src="/logo-icon.png"
           alt="Prato Já"
-          style={{ width: 48, height: 48, objectFit: 'contain', borderRadius: 10, flexShrink: 0 }}
+          style={{ width: 92, height: 92, objectFit: 'contain', borderRadius: 14, flexShrink: 0 }}
         />
         <span
           style={{
             fontWeight: 800,
-            fontSize: 26,
+            fontSize: 36,
             background: colors.gradient,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',

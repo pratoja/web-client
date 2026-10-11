@@ -54,6 +54,7 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
 
       <div
         ref={scrollRef}
+        className="banner-scroll"
         style={{
           display: 'flex',
           gap: 20,
