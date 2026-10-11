@@ -38,9 +38,9 @@ export function Header() {
   return (
     <header
       style={{
-        backgroundColor: colors.dark,
+        background: `linear-gradient(180deg, ${colors.dark} 0%, ${colors.darkSecondary} 100%)`,
         color: colors.onDark,
-        padding: '14px 20px',
+        padding: '12px 20px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -48,10 +48,36 @@ export function Header() {
         position: 'sticky',
         top: 0,
         zIndex: 50,
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
       }}
     >
-      <Link to="/" style={{ color: colors.onDark, fontWeight: 800, fontSize: 20, textDecoration: 'none' }}>
-        🍽️ Prato Já
+      <Link
+        to="/"
+        className="brand"
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: 10,
+          textDecoration: 'none',
+        }}
+      >
+        <img
+          src="/logo-icon.png"
+          alt="Prato Já"
+          style={{ width: 34, height: 34, objectFit: 'contain', borderRadius: 8, flexShrink: 0 }}
+        />
+        <span
+          style={{
+            fontWeight: 800,
+            fontSize: 20,
+            background: colors.gradient,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}
+        >
+          Prato Já
+        </span>
       </Link>
 
       <nav style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
@@ -96,10 +122,10 @@ export function Header() {
               to="/cadastro"
               style={{
                 color: '#1A1A1A',
-                backgroundColor: colors.primary,
+                background: colors.gradient,
                 textDecoration: 'none',
-                padding: '7px 14px',
-                borderRadius: 8,
+                padding: '7px 16px',
+                borderRadius: 20,
                 fontWeight: 700,
                 fontSize: 14,
               }}

@@ -4,9 +4,16 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   background-color: #F7F7F7;
   color: #1A1A1A;
+}
+
+h1,
+h2,
+h3,
+.brand {
+  font-family: 'Poppins', 'Inter', sans-serif;
 }
 
 button {
