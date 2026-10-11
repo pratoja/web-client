@@ -40,7 +40,7 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
           className="brand"
           style={{
             margin: 0,
-            fontSize: 18,
+            fontSize: 22,
             fontWeight: 800,
             background: colors.gradient,
             WebkitBackgroundClip: 'text',
@@ -56,7 +56,7 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
         ref={scrollRef}
         style={{
           display: 'flex',
-          gap: 16,
+          gap: 20,
           overflowX: 'auto',
           padding: '4px 20px 10px',
           scrollSnapType: 'x mandatory',
@@ -68,9 +68,9 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
             onClick={() => handlePress(banner)}
             style={{
               position: 'relative',
-              width: 340,
-              height: 190,
-              borderRadius: 18,
+              width: 560,
+              height: 300,
+              borderRadius: 22,
               overflow: 'hidden',
               flexShrink: 0,
               cursor: banner.linkUrl ? 'pointer' : 'default',
@@ -105,10 +105,10 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
               className="brand"
               style={{
                 position: 'absolute',
-                top: 12,
-                left: 12,
-                width: 40,
-                height: 40,
+                top: 16,
+                left: 16,
+                width: 54,
+                height: 54,
                 borderRadius: '50%',
                 background: colors.gradient,
                 color: '#1A1A1A',
@@ -116,9 +116,9 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontWeight: 800,
-                fontSize: 18,
+                fontSize: 24,
                 boxShadow: '0 4px 10px rgba(0,0,0,0.35)',
-                border: '2px solid rgba(255,255,255,0.85)',
+                border: '3px solid rgba(255,255,255,0.85)',
               }}
             >
               {index + 1}

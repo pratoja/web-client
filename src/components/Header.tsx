@@ -64,12 +64,12 @@ export function Header() {
         <img
           src="/logo-icon.png"
           alt="Prato Já"
-          style={{ width: 34, height: 34, objectFit: 'contain', borderRadius: 8, flexShrink: 0 }}
+          style={{ width: 48, height: 48, objectFit: 'contain', borderRadius: 10, flexShrink: 0 }}
         />
         <span
           style={{
             fontWeight: 800,
-            fontSize: 20,
+            fontSize: 26,
             background: colors.gradient,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
