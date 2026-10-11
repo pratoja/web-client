@@ -70,14 +70,14 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
             style={{
               position: 'relative',
               width: 560,
-              height: 300,
+              height: 260,
               borderRadius: 22,
               overflow: 'hidden',
               flexShrink: 0,
               cursor: banner.linkUrl ? 'pointer' : 'default',
               scrollSnapAlign: 'start',
               boxShadow: '0 14px 32px rgba(0,0,0,0.22)',
-              backgroundColor: colors.border,
+              background: `linear-gradient(135deg, ${colors.dark}, ${colors.darkSecondary})`,
               border: '1px solid rgba(255,183,3,0.25)',
               transition: 'transform 0.2s ease',
             }}
@@ -94,7 +94,9 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
               style={{
                 width: '100%',
                 height: '100%',
-                objectFit: 'cover',
+                // "contain" garante que o banner inteiro apareça, sem cortar
+                // texto ou parte da imagem nas bordas.
+                objectFit: 'contain',
                 display: 'block',
               }}
             />
