@@ -69,7 +69,7 @@ export function Header() {
         <span
           style={{
             fontWeight: 800,
-            fontSize: 36,
+            fontSize: 26,
             background: colors.gradient,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
