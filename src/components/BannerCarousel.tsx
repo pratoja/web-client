@@ -81,39 +81,6 @@ export function BannerCarousel({ banners }: { banners: Banner[] }) {
             />
           ))}
 
-          {/* Sombra gradiente embaixo, pra destacar o número mesmo em cima de fotos claras */}
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'linear-gradient(180deg, rgba(0,0,0,0) 65%, rgba(0,0,0,0.35) 100%)',
-              pointerEvents: 'none',
-            }}
-          />
-
-          {/* Selo numerado estilo "Top 10" */}
-          <div
-            className="brand"
-            style={{
-              position: 'absolute',
-              top: 16,
-              left: 16,
-              width: 54,
-              height: 54,
-              borderRadius: '50%',
-              background: colors.gradient,
-              color: '#1A1A1A',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontWeight: 800,
-              fontSize: 24,
-              boxShadow: '0 4px 10px rgba(0,0,0,0.35)',
-              border: '3px solid rgba(255,255,255,0.85)',
-            }}
-          >
-            {activeIndex + 1}
-          </div>
         </div>
       </div>
 
