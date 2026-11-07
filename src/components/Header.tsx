@@ -64,7 +64,7 @@ export function Header() {
         <img
           src="/logo-icon.png"
           alt="Prato Já"
-          style={{ width: 92, height: 92, objectFit: 'contain', borderRadius: 14, flexShrink: 0 }}
+          style={{ width: 44, height: 44, objectFit: 'contain', borderRadius: 10, flexShrink: 0 }}
         />
         <span
           style={{

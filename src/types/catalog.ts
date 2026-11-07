@@ -43,6 +43,16 @@ export interface RestaurantSummary {
   logoUrl?: string | null;
   bannerUrl?: string | null;
   cuisineType?: string | null;
+  // Nota média (⭐) calculada a partir das avaliações reais dos clientes —
+  // null quando a loja ainda não tem nenhuma avaliação.
+  averageRating?: number | null;
+  reviewCount?: number;
+  // Tempo estimado de entrega (minutos) cadastrado pela própria loja —
+  // null quando ela ainda não configurou isso em "Endereço e Entrega".
+  estimatedMinutes?: number | null;
+  // Distância (km) até a localização atual do cliente — só vem preenchida
+  // quando o navegador autoriza a geolocalização.
+  distanceKm?: number | null;
 }
 
 export interface CompanyDetail {
@@ -50,6 +60,10 @@ export interface CompanyDetail {
   tradeName: string;
   logoUrl?: string | null;
   bannerUrl?: string | null;
+  cuisineType?: string | null;
+  // Tempo estimado de entrega (minutos) cadastrado pela própria loja —
+  // null quando ela ainda não configurou isso.
+  estimatedMinutes?: number | null;
   branches?: CompanyBranch[];
 }
 

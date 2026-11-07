@@ -129,30 +129,91 @@ export function RestaurantPage() {
 
   return (
     <div style={{ maxWidth: 1100, margin: '0 auto', paddingBottom: 100 }}>
-      <div style={{ padding: '20px 20px 0' }}>
+      {/* Banner cheio no topo, com o botão de voltar flutuando por cima —
+          igual ao visual do iFood — mesmo quando a loja não tem banner
+          (mostra um fundo escuro com o degradê da marca no lugar). */}
+      <div style={{ position: 'relative' }}>
+        {company?.bannerUrl ? (
+          <img
+            src={company.bannerUrl}
+            alt=""
+            style={{ width: '100%', height: 220, objectFit: 'cover', backgroundColor: colors.border, display: 'block' }}
+          />
+        ) : (
+          <div
+            style={{
+              width: '100%',
+              height: 220,
+              background: `linear-gradient(135deg, ${colors.dark}, ${colors.darkSecondary})`,
+            }}
+          />
+        )}
         <button
           type="button"
           onClick={() => navigate(-1)}
-          style={{ background: 'none', border: 'none', color: colors.primaryDark, fontWeight: 700, cursor: 'pointer', fontSize: 14 }}
+          aria-label="Voltar"
+          style={{
+            position: 'absolute',
+            top: 16,
+            left: 16,
+            width: 38,
+            height: 38,
+            borderRadius: 19,
+            border: 'none',
+            backgroundColor: 'rgba(255,255,255,0.92)',
+            color: colors.text,
+            fontWeight: 800,
+            fontSize: 19,
+            lineHeight: '38px',
+            textAlign: 'center',
+            padding: 0,
+            cursor: 'pointer',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.25)',
+          }}
         >
-          ‹ Voltar
+          ‹
         </button>
       </div>
 
-      <div style={{ padding: '8px 20px 0', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <h1 style={{ fontSize: 22, fontWeight: 800, color: colors.text, margin: 0 }}>{company?.tradeName ?? ''}</h1>
-        {averageRating !== null ? (
-          <span style={{ fontSize: 13, color: colors.textMuted }}>
-            ⭐ {averageRating.toFixed(1)} · {reviews.length} {reviews.length === 1 ? 'avaliação' : 'avaliações'}
-          </span>
+      <div style={{ padding: '0 20px' }}>
+        {company?.logoUrl ? (
+          <img
+            src={company.logoUrl}
+            alt=""
+            style={{
+              width: 64,
+              height: 64,
+              borderRadius: 16,
+              objectFit: 'cover',
+              border: `3px solid ${colors.surface}`,
+              boxShadow: '0 2px 8px rgba(0,0,0,0.18)',
+              marginTop: -32,
+              backgroundColor: colors.surface,
+              display: 'block',
+            }}
+          />
+        ) : null}
+
+        <h1 style={{ fontSize: 22, fontWeight: 800, color: colors.text, margin: '10px 0 2px' }}>
+          {company?.tradeName ?? ''}
+        </h1>
+        {company?.cuisineType ? (
+          <div style={{ fontSize: 13, color: colors.textMuted, marginBottom: 6 }}>{company.cuisineType}</div>
+        ) : null}
+
+        {averageRating !== null || company?.estimatedMinutes != null ? (
+          <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 13, fontWeight: 600, color: colors.textMuted }}>
+            {averageRating !== null ? (
+              <span style={{ display: 'flex', alignItems: 'center', gap: 3, color: colors.text }}>
+                ⭐ {averageRating.toFixed(1)} · {reviews.length} {reviews.length === 1 ? 'avaliação' : 'avaliações'}
+              </span>
+            ) : null}
+            {company?.estimatedMinutes != null ? <span>⏱️ {company.estimatedMinutes} min</span> : null}
+          </div>
         ) : null}
       </div>
 
-      {company?.bannerUrl ? (
-        <img src={company.bannerUrl} alt="" style={{ width: '100%', maxHeight: 220, objectFit: 'cover', marginTop: 14 }} />
-      ) : null}
-
-      <div style={{ marginTop: 14 }}>
+      <div style={{ marginTop: 18 }}>
         <BannerCarousel banners={banners} />
       </div>
 
